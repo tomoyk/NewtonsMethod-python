@@ -1,28 +1,44 @@
-]#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from sympy import *
 
 # シンボルの設定
 x = symbols('x')
 
-# 変数の初期化
-x1 = 5
-counter = 0;
-formula = diff(x**2-2, x)
+# debug設定
+DEBUG=false
 
-def F(ar_X):
-  return ar_X**2-2
+# 元の関数F(x)
+def F(ar_x, C):
+  return ar_x**2-C
 
+# 微分した関数F'(x)
 def Fd(ar_x):
-  return formula.subs(x, ar_x)
+  return 2*ar_x
 
-while True:
-  x2 = x1 - F(x1) / Fd(x1)
+# Root計算
+def sqrt(num):
+  x1 = 10 # 開始点のx座標
+  counter = 0; # カウンタ
 
-  if abs(x2 - x1) < 0.000000001:
-    break
+  while True:
+    # 次の項を計算
+    x2 = x1 - F(x1, num) / Fd(x1)
 
-  x1 = x2
+    # x2とx1の差が0.000000001を下回った時
+    if abs(x2 - x1) < 0.000000001:
+      break
 
-  counter+=1
-  print(counter,"-",x1)
+    # 次の項(x2)を前の項(x1)へ代入
+    x1 = x2
+
+    # カウンタを増加
+    counter+=1
+
+    # Debugメッセージ
+    if DEBUG:
+      print(counter,"-",x1)
+
+  return x1
+
+print("√3 =",sqrt(3))
