@@ -1,19 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from sympy import *
-
-# シンボルの設定
-x = symbols('x')
 
 # debug設定
-DEBUG=false
+DEBUG = False
 
 # 元の関数F(x)
 def F(ar_x, C):
   return ar_x**2-C
 
-# 微分した関数F'(x)
-def Fd(ar_x):
+# 微分した関数G(x)
+def G(ar_x):
   return 2*ar_x
 
 # Root計算
@@ -23,7 +19,7 @@ def sqrt(num):
 
   while True:
     # 次の項を計算
-    x2 = x1 - F(x1, num) / Fd(x1)
+    x2 = x1 - F(x1, num) / G(x1)
 
     # x2とx1の差が0.000000001を下回った時
     if abs(x2 - x1) < 0.000000001:
